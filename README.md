@@ -2,7 +2,7 @@
 
 My personal portfolio site, built to showcase my projects, skills, and experience.
 
-🔗 Live site: _coming soon_
+🔗 Live site: [portfolio-website-nu-sooty-23.vercel.app](https://portfolio-website-nu-sooty-23.vercel.app/)
 
 ## Tech Stack
 
