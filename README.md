@@ -37,13 +37,13 @@ Starts the dev server with hot reload at `http://localhost:3000`.
 
 ## Available Scripts
 
-| Command           | Description                                |
-| ------------------ | ------------------------------------------- |
-| `npm run dev`      | Start the local development server          |
-| `npm run build`    | Build for production                        |
-| `npm run start`    | Run the production build locally            |
-| `npm run lint`     | Lint the codebase with ESLint               |
-| `npm run format`   | Format the codebase with Prettier           |
+| Command          | Description                        |
+| ---------------- | ---------------------------------- |
+| `npm run dev`    | Start the local development server |
+| `npm run build`  | Build for production               |
+| `npm run start`  | Run the production build locally   |
+| `npm run lint`   | Lint the codebase with ESLint      |
+| `npm run format` | Format the codebase with Prettier  |
 
 ## Adding UI Components
 
