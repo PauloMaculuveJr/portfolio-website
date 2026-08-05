@@ -1,32 +1,48 @@
-# React + TypeScript + Vite
+# Personal Portfolio Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+My personal portfolio site, built to showcase my projects, skills, and experience.
 
-Currently, two official plugins are available:
+🔗 Live site: _coming soon_
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Tech Stack
 
-## React Compiler
+- [React](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vite.dev/) — build tool and dev server
+- [Tailwind CSS](https://tailwindcss.com/) — styling
+- [ESLint](https://eslint.org/) + [Prettier](https://prettier.io/) — linting and formatting
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Getting Started
 
-## Expanding the Oxlint configuration
+### Prerequisites
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+- [Node.js](https://nodejs.org/) 20+
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+### Installation
+
+```bash
+git clone https://github.com/PauloMaculuveJr/portfolio-website.git
+cd portfolio-website
+npm install
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+### Development
+
+```bash
+npm run dev
+```
+
+Starts the dev server with hot module reload at `http://localhost:5173`.
+
+## Available Scripts
+
+| Command           | Description                                |
+| ------------------ | ------------------------------------------- |
+| `npm run dev`      | Start the local development server          |
+| `npm run build`    | Type-check and build for production         |
+| `npm run preview`  | Preview the production build locally        |
+| `npm run lint`     | Lint the codebase with ESLint               |
+| `npm run format`   | Format the codebase with Prettier           |
+
+## License
+
+This project is for personal use. All rights reserved.
