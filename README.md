@@ -1,8 +1,8 @@
 <div align="center">
 
-# Paulo Maculuve Junior — Portfolio
+# Paulo Maculuve Junior - Portfolio
 
-_A personal portfolio site showcasing my projects, skills, and experience._
+A personal portfolio site showcasing my projects, skills, and experience.
 
 [![CI](https://github.com/PauloMaculuveJr/portfolio-website/actions/workflows/ci.yml/badge.svg)](https://github.com/PauloMaculuveJr/portfolio-website/actions/workflows/ci.yml)
 [![Deployed on Vercel](https://img.shields.io/badge/Deployed_on-Vercel-000000?style=flat&logo=vercel&logoColor=white)](https://portfolio-website-nu-sooty-23.vercel.app/)
@@ -11,33 +11,31 @@ _A personal portfolio site showcasing my projects, skills, and experience._
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=flat&logo=tailwindcss&logoColor=white)
 ![License](https://img.shields.io/badge/License-Proprietary-lightgrey?style=flat)
 
-**[🔗 View Live Site](https://portfolio-website-nu-sooty-23.vercel.app/)**
+**[View Live Site](https://portfolio-website-nu-sooty-23.vercel.app/)**
 
 </div>
 
----
+## Contents
 
-## 📋 Contents
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+- [Available Scripts](#available-scripts)
+- [Adding UI Components](#adding-ui-components)
+- [Roadmap](#roadmap)
+- [License](#license)
 
-- [Tech Stack](#-tech-stack)
-- [Getting Started](#-getting-started)
-- [Available Scripts](#-available-scripts)
-- [Adding UI Components](#-adding-ui-components)
-- [Roadmap](#-roadmap)
-- [License](#-license)
+## Tech Stack
 
-## 🛠 Tech Stack
+| Category   | Technology                                                                                         |
+| ---------- | -------------------------------------------------------------------------------------------------- |
+| Framework  | [Next.js](https://nextjs.org/) (App Router), built-in routing, SSR/SSG, image optimization for SEO |
+| Language   | [TypeScript](https://www.typescriptlang.org/) with [React](https://react.dev/)                     |
+| Styling    | [Tailwind CSS](https://tailwindcss.com/)                                                           |
+| Components | [shadcn/ui](https://ui.shadcn.com/), accessible and customizable                                   |
+| Animation  | [Framer Motion](https://motion.dev/)                                                               |
+| Tooling    | [ESLint](https://eslint.org/) and [Prettier](https://prettier.io/)                                 |
 
-| Category   | Technology                                                                                                     |
-| ---------- | -------------------------------------------------------------------------------------------------------------- |
-| Framework  | [Next.js](https://nextjs.org/) (App Router) — built-in routing, SSR/SSG, and image optimization for strong SEO |
-| Language   | [TypeScript](https://www.typescriptlang.org/) + [React](https://react.dev/)                                    |
-| Styling    | [Tailwind CSS](https://tailwindcss.com/)                                                                       |
-| Components | [shadcn/ui](https://ui.shadcn.com/) — accessible, customizable UI                                              |
-| Animation  | [Framer Motion](https://motion.dev/)                                                                           |
-| Tooling    | [ESLint](https://eslint.org/) + [Prettier](https://prettier.io/)                                               |
-
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -59,7 +57,7 @@ npm run dev
 
 Starts the dev server with hot reload at `http://localhost:3000`.
 
-## 📜 Available Scripts
+## Available Scripts
 
 | Command          | Description                        |
 | ---------------- | ---------------------------------- |
@@ -69,7 +67,7 @@ Starts the dev server with hot reload at `http://localhost:3000`.
 | `npm run lint`   | Lint the codebase with ESLint      |
 | `npm run format` | Format the codebase with Prettier  |
 
-## 🧩 Adding UI Components
+## Adding UI Components
 
 This project uses shadcn/ui. To add a new component:
 
@@ -77,21 +75,19 @@ This project uses shadcn/ui. To add a new component:
 npx shadcn@latest add <component-name>
 ```
 
-## 🗺 Roadmap
+## Roadmap
 
-The site currently ships as a clean, deployed Next.js scaffold. In progress next:
+The site currently ships as a clean, deployed Next.js scaffold. Planned next:
 
 - [ ] Dark, cinematic visual redesign
-- [ ] Scroll-driven storytelling (GSAP + ScrollTrigger + Lenis smooth scroll)
+- [ ] Scroll-driven storytelling with GSAP, ScrollTrigger, and Lenis smooth scroll
 - [ ] Custom cursor and 3D tilt/depth micro-interactions
 - [ ] Persistent 3D avatar with cursor-tracking eyes
-- [ ] Sections: Hero, About, What I Do, Experience, Projects, Tech Stack, Contact
+- [ ] Sections for Hero, About, What I Do, Experience, Projects, Tech Stack, and Contact
 
-## 📄 License
+## License
 
 This project is for personal use. All rights reserved.
-
----
 
 <div align="center">
 
