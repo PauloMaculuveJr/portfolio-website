@@ -1,34 +1,43 @@
-# Personal Portfolio Website
+<div align="center">
+
+# Paulo Maculuve Junior — Portfolio
+
+_A personal portfolio site showcasing my projects, skills, and experience._
 
 [![CI](https://github.com/PauloMaculuveJr/portfolio-website/actions/workflows/ci.yml/badge.svg)](https://github.com/PauloMaculuveJr/portfolio-website/actions/workflows/ci.yml)
+[![Deployed on Vercel](https://img.shields.io/badge/Deployed_on-Vercel-000000?style=flat&logo=vercel&logoColor=white)](https://portfolio-website-nu-sooty-23.vercel.app/)
 ![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat&logo=next.js&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=flat&logo=tailwindcss&logoColor=white)
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed_on-Vercel-000000?style=flat&logo=vercel&logoColor=white)](https://portfolio-website-nu-sooty-23.vercel.app/)
+![License](https://img.shields.io/badge/License-Proprietary-lightgrey?style=flat)
 
-My personal portfolio site, built to showcase my projects, skills, and experience.
+**[🔗 View Live Site](https://portfolio-website-nu-sooty-23.vercel.app/)**
 
-🔗 **Live site:** [portfolio-website-nu-sooty-23.vercel.app](https://portfolio-website-nu-sooty-23.vercel.app/)
+</div>
 
-## Contents
+---
 
-- [Tech Stack](#tech-stack)
-- [Getting Started](#getting-started)
-- [Available Scripts](#available-scripts)
-- [Adding UI Components](#adding-ui-components)
-- [Roadmap](#roadmap)
-- [License](#license)
+## 📋 Contents
 
-## Tech Stack
+- [Tech Stack](#-tech-stack)
+- [Getting Started](#-getting-started)
+- [Available Scripts](#-available-scripts)
+- [Adding UI Components](#-adding-ui-components)
+- [Roadmap](#-roadmap)
+- [License](#-license)
 
-- [Next.js](https://nextjs.org/) (App Router) — React framework with built-in routing, SSR/SSG, and image optimization for strong SEO
-- [React](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
-- [Tailwind CSS](https://tailwindcss.com/) — styling
-- [shadcn/ui](https://ui.shadcn.com/) — accessible, customizable UI components
-- [Framer Motion](https://motion.dev/) — animations and transitions
-- [ESLint](https://eslint.org/) + [Prettier](https://prettier.io/) — linting and formatting
+## 🛠 Tech Stack
 
-## Getting Started
+| Category   | Technology                                                                                                     |
+| ---------- | -------------------------------------------------------------------------------------------------------------- |
+| Framework  | [Next.js](https://nextjs.org/) (App Router) — built-in routing, SSR/SSG, and image optimization for strong SEO |
+| Language   | [TypeScript](https://www.typescriptlang.org/) + [React](https://react.dev/)                                    |
+| Styling    | [Tailwind CSS](https://tailwindcss.com/)                                                                       |
+| Components | [shadcn/ui](https://ui.shadcn.com/) — accessible, customizable UI                                              |
+| Animation  | [Framer Motion](https://motion.dev/)                                                                           |
+| Tooling    | [ESLint](https://eslint.org/) + [Prettier](https://prettier.io/)                                               |
+
+## 🚀 Getting Started
 
 ### Prerequisites
 
@@ -50,7 +59,7 @@ npm run dev
 
 Starts the dev server with hot reload at `http://localhost:3000`.
 
-## Available Scripts
+## 📜 Available Scripts
 
 | Command          | Description                        |
 | ---------------- | ---------------------------------- |
@@ -60,7 +69,7 @@ Starts the dev server with hot reload at `http://localhost:3000`.
 | `npm run lint`   | Lint the codebase with ESLint      |
 | `npm run format` | Format the codebase with Prettier  |
 
-## Adding UI Components
+## 🧩 Adding UI Components
 
 This project uses shadcn/ui. To add a new component:
 
@@ -68,7 +77,7 @@ This project uses shadcn/ui. To add a new component:
 npx shadcn@latest add <component-name>
 ```
 
-## Roadmap
+## 🗺 Roadmap
 
 The site currently ships as a clean, deployed Next.js scaffold. In progress next:
 
@@ -78,6 +87,14 @@ The site currently ships as a clean, deployed Next.js scaffold. In progress next
 - [ ] Persistent 3D avatar with cursor-tracking eyes
 - [ ] Sections: Hero, About, What I Do, Experience, Projects, Tech Stack, Contact
 
-## License
+## 📄 License
 
 This project is for personal use. All rights reserved.
+
+---
+
+<div align="center">
+
+Built by [Paulo Maculuve Junior](https://github.com/PauloMaculuveJr)
+
+</div>
