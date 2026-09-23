@@ -2,7 +2,7 @@
 
 import { useRef } from 'react'
 import { motion, useReducedMotion, useScroll, useTransform, type Variants } from 'framer-motion'
-import { ArrowDown, ArrowUpRight, MapPin } from 'lucide-react'
+import { ArrowDown, MapPin } from 'lucide-react'
 import { site } from '@/data/site'
 
 const ease = [0.22, 1, 0.36, 1] as const
@@ -103,14 +103,12 @@ export function Hero() {
 
           <div className="flex flex-wrap gap-3">
             <a
-              href={site.links.github}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#work"
               className="group bg-foreground text-background hover:bg-accent focus-visible:ring-ring focus-visible:ring-offset-background inline-flex h-12 items-center gap-2 rounded-full px-6 font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
             >
               View my work
-              <ArrowUpRight
-                className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              <ArrowDown
+                className="size-4 transition-transform group-hover:translate-y-0.5"
                 aria-hidden
               />
             </a>
@@ -125,7 +123,7 @@ export function Hero() {
       </motion.div>
 
       <motion.a
-        href="#contact"
+        href="#about"
         aria-label="Scroll down"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

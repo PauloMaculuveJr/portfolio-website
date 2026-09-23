@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { motion, useMotionValueEvent, useScroll } from 'framer-motion'
 import { GitHubIcon } from '@/components/icons'
-import { site } from '@/data/site'
+import { nav, site } from '@/data/site'
 import { cn } from '@/lib/utils'
 
 export function SiteHeader() {
@@ -33,6 +33,18 @@ export function SiteHeader() {
         </a>
 
         <nav className="flex items-center gap-2 text-sm">
+          <ul className="mr-4 hidden items-center gap-1 md:flex">
+            {nav.map((item) => (
+              <li key={item.href}>
+                <a
+                  href={item.href}
+                  className="text-muted-foreground hover:text-foreground focus-visible:ring-ring rounded-full px-3 py-1.5 transition-colors outline-none focus-visible:ring-2"
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
           <a
             href={site.links.github}
             target="_blank"
