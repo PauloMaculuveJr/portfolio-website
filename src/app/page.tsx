@@ -1,3 +1,4 @@
+import { Avatar } from '@/components/avatar/avatar'
 import { About } from '@/components/sections/about'
 import { Contact } from '@/components/sections/contact'
 import { Experience } from '@/components/sections/experience'
@@ -20,6 +21,7 @@ export default function Home() {
         <TechStack />
         <Contact />
       </main>
+      <Avatar />
     </>
   )
 }

@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import { motion, useMotionValueEvent, useScroll } from 'framer-motion'
 import { GitHubIcon } from '@/components/icons'
+import { Magnetic } from '@/components/magnetic'
+import { ThemeToggle } from '@/components/theme-toggle'
 import { nav, site } from '@/data/site'
 import { cn } from '@/lib/utils'
 
@@ -54,12 +56,15 @@ export function SiteHeader() {
           >
             <GitHubIcon className="size-5" />
           </a>
-          <a
-            href="#contact"
-            className="border-border hover:border-accent hover:text-accent focus-visible:ring-ring rounded-full border px-4 py-1.5 transition-colors outline-none focus-visible:ring-2"
-          >
-            Contact
-          </a>
+          <ThemeToggle />
+          <Magnetic>
+            <a
+              href="#contact"
+              className="border-border hover:border-accent hover:text-accent focus-visible:ring-ring rounded-full border px-4 py-1.5 transition-colors outline-none focus-visible:ring-2"
+            >
+              Contact
+            </a>
+          </Magnetic>
         </nav>
       </div>
     </motion.header>

@@ -4,11 +4,13 @@ import { useRef } from 'react'
 import { ArrowUpRight } from 'lucide-react'
 import { GitHubIcon } from '@/components/icons'
 import { site } from '@/data/site'
+import { useMagnetic } from '@/hooks/use-magnetic'
 import { gsap, MOTION_OK, useGSAP } from '@/lib/gsap'
 
 export function Contact() {
   const ref = useRef<HTMLElement>(null)
   const buttonRef = useRef<HTMLAnchorElement>(null)
+  useMagnetic(buttonRef)
 
   useGSAP(
     () => {
@@ -33,34 +35,12 @@ export function Contact() {
           scrollTrigger: { trigger: '[data-contact-fade]', start: 'top 90%' },
         })
       })
-
-      // Magnetic CTA: the button leans toward the cursor on devices with a fine pointer
-      mm.add(`(pointer: fine) and ${MOTION_OK}`, () => {
-        const button = buttonRef.current!
-        const xTo = gsap.quickTo(button, 'x', { duration: 0.6, ease: 'elastic.out(1, 0.4)' })
-        const yTo = gsap.quickTo(button, 'y', { duration: 0.6, ease: 'elastic.out(1, 0.4)' })
-
-        const onMove = (e: PointerEvent) => {
-          const rect = button.getBoundingClientRect()
-          xTo((e.clientX - (rect.left + rect.width / 2)) * 0.35)
-          yTo((e.clientY - (rect.top + rect.height / 2)) * 0.35)
-        }
-        const onLeave = () => {
-          xTo(0)
-          yTo(0)
-        }
-        button.addEventListener('pointermove', onMove)
-        button.addEventListener('pointerleave', onLeave)
-        return () => {
-          button.removeEventListener('pointermove', onMove)
-          button.removeEventListener('pointerleave', onLeave)
-        }
-      })
     },
     { scope: ref },
   )
 
   const headline = ["Let's", 'talk']
+  const GRADIENT = 'from-accent to-accent-2 bg-linear-to-r bg-clip-text text-transparent'
 
   return (
     <section id="contact" ref={ref} className="border-border relative overflow-hidden border-t">
@@ -83,10 +63,23 @@ export function Contact() {
             <span
               key={word}
               aria-hidden
-              className={`block overflow-hidden pb-[0.05em] ${w === 1 ? 'font-display text-accent font-normal italic' : ''}`}
+              className={`block overflow-hidden pb-[0.05em] ${w === 1 ? 'font-display font-normal italic' : ''}`}
             >
-              {word.split('').map((char, i) => (
-                <span key={i} data-char className="inline-block">
+              {word.split('').map((char, i, all) => (
+                <span
+                  key={i}
+                  data-char
+                  // Each letter shows its slice of one gradient spanning the whole word
+                  style={
+                    w === 1
+                      ? {
+                          backgroundSize: `${all.length * 100}% 100%`,
+                          backgroundPosition: `${(i / (all.length - 1)) * 100}% 0`,
+                        }
+                      : undefined
+                  }
+                  className={`inline-block ${w === 1 ? `${GRADIENT} pr-[0.04em]` : ''}`}
+                >
                   {char}
                 </span>
               ))}
@@ -117,7 +110,7 @@ export function Contact() {
           </a>
         </div>
 
-        <footer className="border-border text-muted-foreground mt-32 flex flex-col gap-4 border-t pt-8 text-sm md:flex-row md:items-center md:justify-between">
+        <footer className="border-border text-muted-foreground mt-32 flex flex-col gap-4 border-t pt-8 pr-28 text-sm md:flex-row md:items-center md:justify-between md:pr-36">
           <span>
             © {new Date().getFullYear()} {site.name}
           </span>

@@ -4,6 +4,7 @@ import { useRef } from 'react'
 import { motion, useReducedMotion, useScroll, useTransform, type Variants } from 'framer-motion'
 import { ArrowDown, MapPin } from 'lucide-react'
 import { site } from '@/data/site'
+import { Magnetic } from '@/components/magnetic'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
@@ -50,7 +51,11 @@ export function Hero() {
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_70%)] bg-[size:72px_72px]"
+        className="bg-accent-2/15 pointer-events-none absolute top-[70%] left-[75%] -z-10 size-[36rem] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[140px]"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_70%)] bg-[size:72px_72px] dark:hidden"
       />
 
       <motion.div
@@ -83,10 +88,10 @@ export function Hero() {
               {firstName}
             </motion.span>
           </span>
-          <span className="block overflow-hidden pb-[0.08em]">
+          <span className="-mb-[0.14em] block overflow-hidden pb-[0.22em]">
             <motion.span
               variants={line}
-              className="font-display text-accent block font-normal tracking-[-0.02em] italic"
+              className="font-display from-accent to-accent-2 -mb-[0.2em] block bg-linear-to-r bg-clip-text pr-[0.12em] pb-[0.2em] font-normal tracking-[-0.02em] text-transparent italic"
             >
               {lastName}
             </motion.span>
@@ -102,22 +107,26 @@ export function Hero() {
           </p>
 
           <div className="flex flex-wrap gap-3">
-            <a
-              href="#work"
-              className="group bg-foreground text-background hover:bg-accent focus-visible:ring-ring focus-visible:ring-offset-background inline-flex h-12 items-center gap-2 rounded-full px-6 font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
-            >
-              View my work
-              <ArrowDown
-                className="size-4 transition-transform group-hover:translate-y-0.5"
-                aria-hidden
-              />
-            </a>
-            <a
-              href="#contact"
-              className="border-border hover:border-foreground/40 focus-visible:ring-ring inline-flex h-12 items-center rounded-full border px-6 font-medium transition-colors outline-none focus-visible:ring-2"
-            >
-              Get in touch
-            </a>
+            <Magnetic>
+              <a
+                href="#work"
+                className="group bg-foreground text-background hover:bg-accent focus-visible:ring-ring focus-visible:ring-offset-background inline-flex h-12 items-center gap-2 rounded-full px-6 font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+              >
+                View my work
+                <ArrowDown
+                  className="size-4 transition-transform group-hover:translate-y-0.5"
+                  aria-hidden
+                />
+              </a>
+            </Magnetic>
+            <Magnetic>
+              <a
+                href="#contact"
+                className="border-border hover:border-foreground/40 focus-visible:ring-ring inline-flex h-12 items-center rounded-full border px-6 font-medium transition-colors outline-none focus-visible:ring-2"
+              >
+                Get in touch
+              </a>
+            </Magnetic>
           </div>
         </motion.div>
       </motion.div>

@@ -3,6 +3,7 @@
 import { useRef } from 'react'
 import { SectionHeading } from '@/components/section-heading'
 import { services } from '@/data/site'
+import { useTilt } from '@/hooks/use-tilt'
 import { gsap, MOTION_OK, useGSAP } from '@/lib/gsap'
 
 export function Services() {
@@ -87,34 +88,43 @@ export function Services() {
       <div ref={viewportRef} className="md:overflow-x-auto">
         <div
           ref={trackRef}
-          className="flex flex-col gap-6 px-6 md:w-max md:flex-row md:pr-[20vw] md:pl-[max(1.5rem,calc((100vw-72rem)/2+1.5rem))]"
+          className="flex flex-col gap-6 px-6 md:w-max md:flex-row md:py-8 md:pr-[20vw] md:pl-[max(1.5rem,calc((100vw-72rem)/2+1.5rem))]"
         >
           {services.map((service, i) => (
-            <article
-              key={service.title}
-              data-card
-              className="group border-border bg-card/60 hover:border-accent/50 relative flex flex-col justify-between overflow-hidden rounded-3xl border p-8 backdrop-blur-sm transition-colors md:h-[26rem] md:w-[28rem] md:p-10"
-            >
-              <span
-                data-card-num
-                aria-hidden
-                className="font-display text-foreground/[0.06] group-hover:text-accent/15 pointer-events-none absolute -top-6 -right-4 text-[10rem] leading-none transition-colors md:text-[14rem]"
-              >
-                {String(i + 1).padStart(2, '0')}
-              </span>
-              <span className="text-accent font-mono text-sm">
-                {String(i + 1).padStart(2, '0')}
-              </span>
-              <div className="relative mt-16 md:mt-0">
-                <h3 className="mb-4 text-2xl font-semibold tracking-tight md:text-3xl">
-                  {service.title}
-                </h3>
-                <p className="text-muted-foreground leading-relaxed">{service.description}</p>
-              </div>
-            </article>
+            <ServiceCard key={service.title} service={service} index={i} />
           ))}
         </div>
       </div>
     </section>
+  )
+}
+
+function ServiceCard({ service, index }: { service: (typeof services)[number]; index: number }) {
+  const ref = useRef<HTMLElement>(null)
+  useTilt(ref)
+
+  return (
+    <article
+      ref={ref}
+      data-card
+      className="group border-border bg-card/60 hover:border-accent/50 relative flex flex-col justify-between overflow-hidden rounded-3xl border p-8 backdrop-blur-sm transition-colors md:h-[26rem] md:w-[28rem] md:p-10"
+    >
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_var(--gx,50%)_var(--gy,50%),color-mix(in_oklch,var(--accent),transparent_85%),transparent_45%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+      />
+      <span
+        data-card-num
+        aria-hidden
+        className="font-display text-foreground/[0.06] group-hover:text-accent/15 pointer-events-none absolute -top-6 -right-4 text-[10rem] leading-none transition-colors md:text-[14rem]"
+      >
+        {String(index + 1).padStart(2, '0')}
+      </span>
+      <span className="text-accent font-mono text-sm">{String(index + 1).padStart(2, '0')}</span>
+      <div className="relative mt-16 md:mt-0">
+        <h3 className="mb-4 text-2xl font-semibold tracking-tight md:text-3xl">{service.title}</h3>
+        <p className="text-muted-foreground leading-relaxed">{service.description}</p>
+      </div>
+    </article>
   )
 }

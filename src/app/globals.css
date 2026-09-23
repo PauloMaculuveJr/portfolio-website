@@ -30,6 +30,7 @@
   --color-destructive: var(--destructive);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
   --color-muted-foreground: var(--muted-foreground);
   --color-muted: var(--muted);
   --color-secondary-foreground: var(--secondary-foreground);
@@ -50,40 +51,77 @@
 }
 
 :root {
-  /* Dark-only, cinematic palette: near-black ground, warm off-white ink, ember accent */
-  color-scheme: dark;
-  --background: oklch(0.13 0.005 60);
-  --foreground: oklch(0.95 0.01 80);
-  --card: oklch(0.17 0.006 60);
-  --card-foreground: oklch(0.95 0.01 80);
-  --popover: oklch(0.17 0.006 60);
-  --popover-foreground: oklch(0.95 0.01 80);
-  --primary: oklch(0.95 0.01 80);
-  --primary-foreground: oklch(0.13 0.005 60);
-  --secondary: oklch(0.22 0.006 60);
-  --secondary-foreground: oklch(0.95 0.01 80);
-  --muted: oklch(0.22 0.006 60);
-  --muted-foreground: oklch(0.68 0.01 70);
-  --accent: oklch(0.74 0.16 50);
-  --accent-foreground: oklch(0.13 0.005 60);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 9%);
-  --input: oklch(1 0 0 / 14%);
-  --ring: oklch(0.74 0.16 50 / 60%);
+  /* Light theme: clean zinc neutrals with an electric violet accent and a pink partner */
+  color-scheme: light;
+  --background: oklch(0.985 0.002 286);
+  --foreground: oklch(0.17 0.012 286);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.17 0.012 286);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.17 0.012 286);
+  --primary: oklch(0.17 0.012 286);
+  --primary-foreground: oklch(0.985 0.002 286);
+  --secondary: oklch(0.95 0.006 286);
+  --secondary-foreground: oklch(0.17 0.012 286);
+  --muted: oklch(0.95 0.006 286);
+  --muted-foreground: oklch(0.5 0.016 286);
+  --accent: oklch(0.56 0.25 293);
+  --accent-2: oklch(0.63 0.24 354);
+  --accent-foreground: oklch(0.99 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.17 0.012 286 / 10%);
+  --input: oklch(0.17 0.012 286 / 14%);
+  --ring: oklch(0.56 0.25 293 / 55%);
+  --shadow: oklch(0.3 0.08 293 / 22%);
+  --grain: 0.035;
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
   --radius: 0.625rem;
-  --sidebar: oklch(0.17 0.006 60);
-  --sidebar-foreground: oklch(0.95 0.01 80);
-  --sidebar-primary: oklch(0.74 0.16 50);
-  --sidebar-primary-foreground: oklch(0.13 0.005 60);
-  --sidebar-accent: oklch(0.22 0.006 60);
-  --sidebar-accent-foreground: oklch(0.95 0.01 80);
+  --sidebar: oklch(1 0 0);
+  --sidebar-foreground: oklch(0.17 0.012 286);
+  --sidebar-primary: oklch(0.56 0.25 293);
+  --sidebar-primary-foreground: oklch(0.99 0 0);
+  --sidebar-accent: oklch(0.95 0.006 286);
+  --sidebar-accent-foreground: oklch(0.17 0.012 286);
+  --sidebar-border: oklch(0.17 0.012 286 / 10%);
+  --sidebar-ring: oklch(0.56 0.25 293 / 55%);
+}
+
+.dark {
+  /* Dark theme: near-black zinc with a brighter violet so it glows */
+  color-scheme: dark;
+  --background: oklch(0.141 0.005 286);
+  --foreground: oklch(0.975 0.003 286);
+  --card: oklch(0.18 0.007 286);
+  --card-foreground: oklch(0.975 0.003 286);
+  --popover: oklch(0.18 0.007 286);
+  --popover-foreground: oklch(0.975 0.003 286);
+  --primary: oklch(0.975 0.003 286);
+  --primary-foreground: oklch(0.141 0.005 286);
+  --secondary: oklch(0.23 0.008 286);
+  --secondary-foreground: oklch(0.975 0.003 286);
+  --muted: oklch(0.23 0.008 286);
+  --muted-foreground: oklch(0.7 0.016 286);
+  --accent: oklch(0.68 0.21 293);
+  --accent-2: oklch(0.73 0.19 354);
+  --accent-foreground: oklch(0.99 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 9%);
+  --input: oklch(1 0 0 / 14%);
+  --ring: oklch(0.68 0.21 293 / 60%);
+  --shadow: oklch(0 0 0 / 50%);
+  --grain: 0.06;
+  --sidebar: oklch(0.18 0.007 286);
+  --sidebar-foreground: oklch(0.975 0.003 286);
+  --sidebar-primary: oklch(0.68 0.21 293);
+  --sidebar-primary-foreground: oklch(0.99 0 0);
+  --sidebar-accent: oklch(0.23 0.008 286);
+  --sidebar-accent-foreground: oklch(0.975 0.003 286);
   --sidebar-border: oklch(1 0 0 / 9%);
-  --sidebar-ring: oklch(0.74 0.16 50 / 60%);
+  --sidebar-ring: oklch(0.68 0.21 293 / 60%);
 }
 
 @layer base {
@@ -98,18 +136,36 @@
   }
 }
 
-/* Film-grain overlay for the cinematic look; static, so no motion cost */
+/* Film-grain texture; static, so no motion cost */
 .grain::after {
   content: '';
   position: fixed;
   inset: -50%;
   z-index: 60;
   pointer-events: none;
-  opacity: 0.06;
+  opacity: var(--grain);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 ::selection {
   background: var(--accent);
   color: var(--accent-foreground);
+}
+
+/* Custom cursor replaces the native one on mouse devices (see components/cursor.tsx) */
+.has-custom-cursor,
+.has-custom-cursor * {
+  cursor: none !important;
+}
+
+/* Soft drop shadow for the avatar that adapts to the theme */
+.avatar-shadow {
+  filter: drop-shadow(0 20px 40px var(--shadow));
+}
+
+/* Theme switch: a circle expanding from the toggle reveals the new theme */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
 }

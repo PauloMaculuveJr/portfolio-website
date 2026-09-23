@@ -29,7 +29,7 @@ export const nav = [
 
 // TODO: rewrite in your own voice
 export const about =
-  'I am a developer from Mozambique who loves turning ideas into interfaces that feel alive. I care about the small details: smooth motion, clean code, fast load times, and products that people actually enjoy using.'
+  "I'm a teenage developer from Mozambique who loves turning ideas into interfaces that feel alive. I started young and haven't stopped building since. I care about the small details: smooth motion, clean code, fast load times, and products that people actually enjoy using."
 
 // TODO: adjust to the work you actually want to be hired for
 export const services = [
@@ -85,21 +85,21 @@ export const projects = [
       'This site: a dark, cinematic portfolio with scroll-driven animation, smooth scrolling, and a Next.js App Router foundation.',
     tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'GSAP'],
     href: 'https://github.com/PauloMaculuveJr/portfolio-website',
-    color: 'oklch(0.74 0.16 50)',
+    color: 'oklch(0.62 0.24 293)',
   },
   {
     title: 'Project Two',
     description: 'TODO: a short description of another project you are proud of.',
     tags: ['React', 'Node.js'],
     href: '',
-    color: 'oklch(0.7 0.12 200)',
+    color: 'oklch(0.72 0.14 215)',
   },
   {
     title: 'Project Three',
     description: 'TODO: a short description of a third project.',
     tags: ['TypeScript', 'API'],
     href: '',
-    color: 'oklch(0.72 0.14 320)',
+    color: 'oklch(0.68 0.22 354)',
   },
 ] as const
 

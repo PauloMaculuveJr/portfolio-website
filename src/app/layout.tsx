@@ -1,7 +1,10 @@
 import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono, Instrument_Serif } from 'next/font/google'
+import { Cursor } from '@/components/cursor'
 import { SmoothScroll } from '@/components/providers/smooth-scroll'
+import { SpaceBackground } from '@/components/space-background'
 import { site } from '@/data/site'
+import { themeScript } from '@/lib/theme'
 import './globals.css'
 
 const geistSans = Geist({
@@ -27,8 +30,11 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: '#0f0d0b',
-  colorScheme: 'dark',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#fafafa' },
+    { media: '(prefers-color-scheme: dark)', color: '#09090b' },
+  ],
+  colorScheme: 'light dark',
 }
 
 export default function RootLayout({ children }: LayoutProps<'/'>) {
@@ -36,9 +42,16 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} dark h-full antialiased`}
+      // The theme script below may flip the dark class before React hydrates
+      suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="grain flex min-h-full flex-col">
+        <SpaceBackground />
         <SmoothScroll>{children}</SmoothScroll>
+        <Cursor />
       </body>
     </html>
   )
