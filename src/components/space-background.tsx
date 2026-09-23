@@ -261,8 +261,39 @@ export function SpaceBackground() {
       mouse.ty = e.clientY / h - 0.5
     }
 
-    let meteor: { x: number; y: number; vx: number; vy: number; life: number } | null = null
-    let nextMeteor = 3
+    type Meteor = {
+      x: number
+      y: number
+      vx: number
+      vy: number
+      age: number
+      life: number
+      tail: number // seconds of travel shown as the trail
+      width: number
+      brightness: number
+    }
+    const meteors: Meteor[] = []
+    let nextMeteor = 0.8
+    const MAX_METEORS = 7
+
+    // White shooting stars streaking in from either side at varied angles, speeds, and depths
+    const spawnMeteor = () => {
+      const fromRight = rand() < 0.65
+      const angle = (0.25 + rand() * 0.45) * (fromRight ? 1 : -1) // radians below horizontal
+      const speed = 650 + rand() * 900
+      const near = rand() < 0.35 // closer meteors are longer, thicker, and brighter
+      meteors.push({
+        x: fromRight ? w * (0.35 + rand() * 0.75) : w * (-0.1 + rand() * 0.65),
+        y: rand() * h * 0.6 - h * 0.05,
+        vx: Math.cos(angle) * speed * (fromRight ? -1 : 1),
+        vy: Math.abs(Math.sin(angle)) * speed,
+        age: 0,
+        life: 0.6 + rand() * 0.9,
+        tail: near ? 0.14 + rand() * 0.08 : 0.07 + rand() * 0.06,
+        width: near ? 1.6 + rand() * 0.9 : 0.7 + rand() * 0.6,
+        brightness: near ? 0.9 + rand() * 0.1 : 0.45 + rand() * 0.35,
+      })
+    }
 
     let frame = 0
     let last = performance.now()
@@ -308,38 +339,45 @@ export function SpaceBackground() {
         ctx.restore()
       }
 
-      // Shooting star every few seconds
+      // Shooting stars: a new one every second or so, several can be in flight at once
       if (animate) {
         nextMeteor -= dt
-        if (!meteor && nextMeteor <= 0) {
-          meteor = {
-            x: rand() * w * 0.8 + w * 0.2,
-            y: rand() * h * 0.4,
-            vx: -900,
-            vy: 420,
-            life: 1,
-          }
-          nextMeteor = 5 + rand() * 7
+        if (nextMeteor <= 0 && meteors.length < MAX_METEORS) {
+          spawnMeteor()
+          // Now and then a second one follows close behind
+          if (rand() < 0.2) spawnMeteor()
+          nextMeteor = 0.5 + rand() * 1.3
         }
-        if (meteor) {
-          meteor.x += meteor.vx * dt
-          meteor.y += meteor.vy * dt
-          meteor.life -= dt * 1.1
-          const tail = ctx.createLinearGradient(
-            meteor.x,
-            meteor.y,
-            meteor.x - meteor.vx * 0.12,
-            meteor.y - meteor.vy * 0.12,
-          )
-          tail.addColorStop(0, `rgba(255,255,255,${Math.max(0, meteor.life)})`)
-          tail.addColorStop(1, 'rgba(167,139,250,0)')
-          ctx.strokeStyle = tail
-          ctx.lineWidth = 1.6
+        for (let i = meteors.length - 1; i >= 0; i--) {
+          const m = meteors[i]
+          m.age += dt
+          m.x += m.vx * dt
+          m.y += m.vy * dt
+          if (m.age >= m.life) {
+            meteors.splice(i, 1)
+            continue
+          }
+          // Fade in, peak, fade out over its lifetime
+          const alpha = Math.sin((m.age / m.life) * Math.PI) * m.brightness
+          const tx = m.x - m.vx * m.tail
+          const ty = m.y - m.vy * m.tail
+          const trail = ctx.createLinearGradient(m.x, m.y, tx, ty)
+          trail.addColorStop(0, `rgba(255,255,255,${alpha})`)
+          trail.addColorStop(0.3, `rgba(235,235,255,${alpha * 0.45})`)
+          trail.addColorStop(1, 'rgba(255,255,255,0)')
+          ctx.strokeStyle = trail
+          ctx.lineWidth = m.width
+          ctx.lineCap = 'round'
           ctx.beginPath()
-          ctx.moveTo(meteor.x, meteor.y)
-          ctx.lineTo(meteor.x - meteor.vx * 0.12, meteor.y - meteor.vy * 0.12)
+          ctx.moveTo(m.x, m.y)
+          ctx.lineTo(tx, ty)
           ctx.stroke()
-          if (meteor.life <= 0) meteor = null
+          // Glowing head
+          const glow = ctx.createRadialGradient(m.x, m.y, 0, m.x, m.y, m.width * 4)
+          glow.addColorStop(0, `rgba(255,255,255,${alpha})`)
+          glow.addColorStop(1, 'rgba(255,255,255,0)')
+          ctx.fillStyle = glow
+          ctx.fillRect(m.x - m.width * 4, m.y - m.width * 4, m.width * 8, m.width * 8)
         }
       }
       ctx.globalCompositeOperation = 'source-over'
