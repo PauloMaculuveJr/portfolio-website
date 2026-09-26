@@ -1,11 +1,13 @@
 'use client'
 
 import { useRef } from 'react'
+import Image from 'next/image'
 import { ArrowUpRight } from 'lucide-react'
 import { SectionHeading } from '@/components/section-heading'
 import { projects } from '@/data/site'
 import { useTilt } from '@/hooks/use-tilt'
 import { gsap, MOTION_OK, useGSAP } from '@/lib/gsap'
+import { cn } from '@/lib/utils'
 
 export function Projects() {
   const ref = useRef<HTMLElement>(null)
@@ -67,22 +69,40 @@ export function Projects() {
 
 function ProjectCard({ project, index }: { project: (typeof projects)[number]; index: number }) {
   const ref = useRef<HTMLElement>(null)
-  useTilt(ref, 3)
+  useTilt(ref, 2)
 
   const art = (
     <>
       <div
         data-art
         aria-hidden
-        className="absolute -inset-[15%] bg-[radial-gradient(circle_at_30%_30%,var(--project),transparent_60%),radial-gradient(circle_at_80%_80%,color-mix(in_oklch,var(--project),black_50%),transparent_55%)] opacity-80"
+        className="absolute -inset-[15%] bg-zinc-900 bg-[radial-gradient(circle_at_30%_25%,color-mix(in_oklch,var(--project),transparent_72%),transparent_60%)]"
       />
-      <span
-        data-depth="3"
-        aria-hidden
-        className="font-display text-background/80 absolute inset-0 flex items-center justify-center text-[12rem] italic"
-      >
-        {project.title.charAt(0)}
-      </span>
+      <div data-depth="3" className="absolute inset-0 flex items-center justify-center p-10">
+        <div
+          className={cn(
+            'transition-transform duration-500 group-hover/card:scale-105',
+            project.logo.plate === 'light' && 'rounded-3xl bg-white p-4 shadow-2xl shadow-black/40',
+          )}
+        >
+          <Image
+            src={project.logo.src}
+            alt={`${project.title} logo`}
+            width={project.logo.width}
+            height={project.logo.height}
+            sizes="(min-width: 768px) 320px, 60vw"
+            className={cn(
+              'h-auto object-contain drop-shadow-[0_8px_24px_rgba(0,0,0,0.45)]',
+              // Wide wordmarks get more width; square marks stay compact
+              project.logo.width > project.logo.height * 2
+                ? 'w-48 md:w-72'
+                : project.logo.plate
+                  ? 'w-36 md:w-48'
+                  : 'w-32 md:w-56',
+            )}
+          />
+        </div>
+      </div>
     </>
   )
 
@@ -103,7 +123,7 @@ function ProjectCard({ project, index }: { project: (typeof projects)[number]; i
           <p className="text-muted-foreground mb-6 font-mono text-sm">
             {String(index + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}
           </p>
-          <h3 className="mb-4 text-3xl font-semibold tracking-tight md:text-5xl">
+          <h3 className="mb-4 text-3xl font-semibold tracking-tight md:text-4xl">
             {project.title}
           </h3>
           <p className="text-muted-foreground max-w-md leading-relaxed">{project.description}</p>
@@ -124,7 +144,7 @@ function ProjectCard({ project, index }: { project: (typeof projects)[number]; i
               href={project.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-1.5 text-sm font-medium transition-colors hover:text-[var(--project)]"
+              className="group hover:text-accent inline-flex items-center gap-1.5 text-sm font-medium transition-colors"
             >
               View project
               <ArrowUpRight
@@ -136,7 +156,7 @@ function ProjectCard({ project, index }: { project: (typeof projects)[number]; i
         </div>
       </div>
 
-      {/* Preview art: swap for a real screenshot with next/image when available */}
+      {/* Brand panel: the project's logo over its color (a banner on mobile) */}
       {project.href ? (
         <a
           href={project.href}
@@ -145,12 +165,12 @@ function ProjectCard({ project, index }: { project: (typeof projects)[number]; i
           tabIndex={-1}
           aria-hidden
           data-cursor="View"
-          className="relative hidden overflow-hidden md:block"
+          className="relative h-48 overflow-hidden md:h-auto"
         >
           {art}
         </a>
       ) : (
-        <div data-cursor="Soon" className="relative hidden overflow-hidden md:block">
+        <div data-cursor="Soon" className="relative h-48 overflow-hidden md:h-auto">
           {art}
         </div>
       )}

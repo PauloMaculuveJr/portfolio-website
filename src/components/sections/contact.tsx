@@ -1,8 +1,8 @@
 'use client'
 
 import { useRef } from 'react'
+import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
-import { GitHubIcon } from '@/components/icons'
 import { site } from '@/data/site'
 import { useMagnetic } from '@/hooks/use-magnetic'
 import { gsap, MOTION_OK, useGSAP } from '@/lib/gsap'
@@ -40,13 +40,12 @@ export function Contact() {
   )
 
   const headline = ["Let's", 'talk']
-  const GRADIENT = 'from-accent to-accent-2 bg-linear-to-r bg-clip-text text-transparent'
 
   return (
     <section id="contact" ref={ref} className="border-border relative overflow-hidden border-t">
       <div
         aria-hidden
-        className="bg-accent/20 pointer-events-none absolute -bottom-1/2 left-1/2 -z-10 size-[50rem] -translate-x-1/2 rounded-full blur-[160px]"
+        className="bg-accent/10 pointer-events-none absolute -bottom-1/2 left-1/2 -z-10 size-[50rem] -translate-x-1/2 rounded-full blur-[160px]"
       />
       <div className="mx-auto max-w-6xl px-6 pt-32 pb-12 md:pt-48">
         <p className="text-muted-foreground mb-6 flex items-center gap-3 font-mono text-xs tracking-[0.25em] uppercase">
@@ -57,29 +56,16 @@ export function Contact() {
 
         <h2
           aria-label="Let's talk"
-          className="text-[clamp(4.5rem,18vw,16rem)] leading-[0.85] font-semibold tracking-[-0.05em]"
+          className="text-[clamp(3.5rem,11vw,9rem)] leading-[0.9] font-semibold tracking-[-0.04em]"
         >
           {headline.map((word, w) => (
             <span
               key={word}
               aria-hidden
-              className={`block overflow-hidden pb-[0.05em] ${w === 1 ? 'font-display font-normal italic' : ''}`}
+              className={`block overflow-hidden pb-[0.05em] ${w === 1 ? 'font-display text-muted-foreground font-normal italic' : ''}`}
             >
-              {word.split('').map((char, i, all) => (
-                <span
-                  key={i}
-                  data-char
-                  // Each letter shows its slice of one gradient spanning the whole word
-                  style={
-                    w === 1
-                      ? {
-                          backgroundSize: `${all.length * 100}% 100%`,
-                          backgroundPosition: `${(i / (all.length - 1)) * 100}% 0`,
-                        }
-                      : undefined
-                  }
-                  className={`inline-block ${w === 1 ? `${GRADIENT} pr-[0.04em]` : ''}`}
-                >
+              {word.split('').map((char, i) => (
+                <span key={i} data-char className="inline-block">
                   {char}
                 </span>
               ))}
@@ -87,27 +73,22 @@ export function Contact() {
           ))}
         </h2>
 
-        <div className="mt-16 flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
+        <div className="mt-12 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
           <p data-contact-fade className="text-muted-foreground max-w-md text-lg leading-relaxed">
             Have a project in mind, a role to fill, or just want to say hi? My inbox is always open.
           </p>
-          <a
+          <Link
             ref={buttonRef}
             data-contact-fade
-            href={site.links.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group bg-foreground text-background hover:bg-accent focus-visible:ring-ring focus-visible:ring-offset-background inline-flex size-40 shrink-0 flex-col items-center justify-center gap-2 self-start rounded-full font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-offset-4 md:size-48 md:self-auto"
+            href="/contact"
+            className="group bg-foreground text-background hover:bg-foreground/85 focus-visible:ring-ring focus-visible:ring-offset-background inline-flex h-12 shrink-0 items-center gap-2 self-start rounded-full px-6 font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-offset-2 md:self-auto"
           >
-            <GitHubIcon className="size-6" />
-            <span className="inline-flex items-center gap-1">
-              Say hello
-              <ArrowUpRight
-                className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                aria-hidden
-              />
-            </span>
-          </a>
+            Get in touch
+            <ArrowUpRight
+              className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              aria-hidden
+            />
+          </Link>
         </div>
 
         <footer className="border-border text-muted-foreground mt-32 flex flex-col gap-4 border-t pt-8 pr-28 text-sm md:flex-row md:items-center md:justify-between md:pr-36">

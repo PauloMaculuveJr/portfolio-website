@@ -47,8 +47,8 @@ export function Cursor() {
         label.textContent = text ?? ''
         gsap.to(ring, {
           scale: text ? 2.4 : target ? 1.6 : 1,
-          backgroundColor: text ? 'var(--accent)' : 'rgba(0,0,0,0)',
-          borderColor: text ? 'var(--accent)' : 'var(--foreground)',
+          backgroundColor: text ? 'var(--foreground)' : 'rgba(0,0,0,0)',
+          borderColor: 'var(--foreground)',
           duration: 0.35,
           ease: 'power3.out',
         })
@@ -88,7 +88,7 @@ export function Cursor() {
       >
         <span
           ref={labelRef}
-          className="text-accent-foreground invisible text-[5px] font-semibold tracking-wider uppercase opacity-0"
+          className="text-background invisible text-[5px] font-semibold tracking-wider uppercase opacity-0"
         />
       </div>
       <div

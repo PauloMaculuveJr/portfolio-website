@@ -8,50 +8,44 @@ import { gsap, MOTION_OK, useGSAP } from '@/lib/gsap'
 
 export function Services() {
   const ref = useRef<HTMLElement>(null)
-  const viewportRef = useRef<HTMLDivElement>(null)
-  const trackRef = useRef<HTMLDivElement>(null)
 
   useGSAP(
     () => {
       const mm = gsap.matchMedia()
 
-      // Desktop: pin the section and scroll the cards sideways
+      // Desktop: pin the section while the cards slide in from the right, one after another,
+      // and land side by side in a row that fits the screen, so every service ends up visible
       mm.add(`(min-width: 768px) and ${MOTION_OK}`, () => {
-        const track = trackRef.current!
-        const distance = () => track.scrollWidth - viewportRef.current!.clientWidth
-
-        gsap.set(viewportRef.current, { overflow: 'hidden' })
-        const tween = gsap.to(track, {
-          x: () => -distance(),
-          ease: 'none',
+        const cards = gsap.utils.toArray<HTMLElement>('[data-card]')
+        const tl = gsap.timeline({
+          defaults: { ease: 'power3.out' },
           scrollTrigger: {
             trigger: ref.current,
             start: 'top top',
-            end: () => `+=${distance()}`,
+            end: '+=110%',
             pin: true,
             scrub: 1,
             invalidateOnRefresh: true,
           },
         })
-
-        // Each card's number drifts against the scroll for depth
-        gsap.utils.toArray<HTMLElement>('[data-card-num]').forEach((num) => {
-          gsap.fromTo(
-            num,
-            { xPercent: 40 },
+        cards.forEach((card, i) => {
+          const at = i * 0.22
+          tl.fromTo(
+            card,
             {
-              xPercent: -40,
-              ease: 'none',
-              scrollTrigger: {
-                trigger: num.parentElement,
-                containerAnimation: tween,
-                start: 'left right',
-                end: 'right left',
-                scrub: true,
-              },
+              // Start just past the right edge of the screen. Measure the card's resting spot
+              // (its on-screen position minus any x it already has from this animation).
+              x: () =>
+                window.innerWidth -
+                (card.getBoundingClientRect().left - Number(gsap.getProperty(card, 'x'))) +
+                40,
             },
+            { x: 0, duration: 0.55 },
+            at,
           )
         })
+        // Hold the finished row on screen for a beat before the page moves on
+        tl.to({}, { duration: 0.35 })
       })
 
       // Mobile: simple staggered fade-up
@@ -74,22 +68,16 @@ export function Services() {
     <section
       id="services"
       ref={ref}
-      className="flex min-h-svh flex-col justify-center overflow-hidden py-24"
+      className="flex min-h-svh flex-col overflow-hidden py-24 md:justify-center md:pt-24 md:pb-10"
     >
       <div className="mx-auto w-full max-w-6xl px-6">
         <SectionHeading
           index="02"
           eyebrow="What I do"
-          title="Crafting the web, end to end"
-          className="md:mb-16"
+          title="What I can build for you"
+          className="md:mb-12"
         />
-      </div>
-
-      <div ref={viewportRef} className="md:overflow-x-auto">
-        <div
-          ref={trackRef}
-          className="flex flex-col gap-6 px-6 md:w-max md:flex-row md:py-8 md:pr-[20vw] md:pl-[max(1.5rem,calc((100vw-72rem)/2+1.5rem))]"
-        >
+        <div className="grid gap-6 md:grid-cols-3">
           {services.map((service, i) => (
             <ServiceCard key={service.title} service={service} index={i} />
           ))}
@@ -107,19 +95,12 @@ function ServiceCard({ service, index }: { service: (typeof services)[number]; i
     <article
       ref={ref}
       data-card
-      className="group border-border bg-card/60 hover:border-accent/50 relative flex flex-col justify-between overflow-hidden rounded-3xl border p-8 backdrop-blur-sm transition-colors md:h-[26rem] md:w-[28rem] md:p-10"
+      className="group border-border bg-card/60 hover:border-accent/50 relative flex flex-col justify-between overflow-hidden rounded-3xl border p-8 backdrop-blur-sm transition-colors md:h-[clamp(16rem,44svh,24rem)] md:p-8 lg:p-10"
     >
       <span
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_var(--gx,50%)_var(--gy,50%),color-mix(in_oklch,var(--accent),transparent_85%),transparent_45%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
       />
-      <span
-        data-card-num
-        aria-hidden
-        className="font-display text-foreground/[0.06] group-hover:text-accent/15 pointer-events-none absolute -top-6 -right-4 text-[10rem] leading-none transition-colors md:text-[14rem]"
-      >
-        {String(index + 1).padStart(2, '0')}
-      </span>
       <span className="text-accent font-mono text-sm">{String(index + 1).padStart(2, '0')}</span>
       <div className="relative mt-16 md:mt-0">
         <h3 className="mb-4 text-2xl font-semibold tracking-tight md:text-3xl">{service.title}</h3>

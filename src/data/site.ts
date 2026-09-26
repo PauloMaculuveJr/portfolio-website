@@ -20,6 +20,7 @@ export const site = {
   },
 } as const
 
+// Section links on the home page; the header prefixes them with / on other pages
 export const nav = [
   { label: 'About', href: '#about' },
   { label: 'Services', href: '#services' },
@@ -31,90 +32,71 @@ export const nav = [
 export const about =
   "I'm a teenage developer from Mozambique who loves turning ideas into interfaces that feel alive. I started young and haven't stopped building since. I care about the small details: smooth motion, clean code, fast load times, and products that people actually enjoy using."
 
-// TODO: adjust to the work you actually want to be hired for
 export const services = [
   {
-    title: 'Frontend Development',
+    title: 'Web Apps & Websites',
     description:
-      'Responsive, accessible interfaces built with React, Next.js, and TypeScript that load fast on every device.',
+      'Fast, responsive websites and full-stack web apps, from landing pages and online stores to dashboards with payments, auth, and APIs.',
   },
   {
-    title: 'Motion & Interaction',
+    title: 'Mobile Applications',
     description:
-      'Scroll-driven storytelling and micro-interactions with GSAP and Framer Motion that make a site memorable.',
+      'Cross-platform mobile apps for iOS and Android that feel native, work smoothly, and connect to the services your business runs on.',
   },
   {
-    title: 'Full-stack Web Apps',
+    title: 'AI Automation',
     description:
-      'From database to deployment: APIs, auth, and data flows wired into polished product experiences.',
-  },
-  {
-    title: 'Performance & SEO',
-    description:
-      'Server rendering, image optimization, and clean markup so your site ranks well and feels instant.',
+      'AI-powered workflows and assistants that take repetitive work off your plate, from answering customers to processing data.',
   },
 ] as const
 
-// TODO: replace every entry with your real roles, studies, or projects
 export const experience = [
   {
-    period: '20XX – Present',
-    role: 'Your current role',
-    place: 'Company or organization',
-    description: 'One or two lines about what you do there and the impact you have had.',
-  },
-  {
-    period: '20XX – 20XX',
-    role: 'A previous role',
-    place: 'Company or organization',
-    description: 'Highlight a project you shipped, a problem you solved, or a skill you grew.',
-  },
-  {
-    period: '20XX – 20XX',
-    role: 'Studies or certification',
-    place: 'University, bootcamp, or course',
-    description: 'What you studied and anything that stood out.',
+    period: '2025 – Present',
+    role: 'Co-founder & Full-Stack Engineer',
+    place: 'Techtroove',
+    // TODO: add a line about what Techtroove builds and your biggest wins there
+    description:
+      'Co-founded Techtroove and lead its engineering end to end: product architecture, backend and APIs, and the polished frontends people actually use.',
   },
 ] as const
 
-// The first project is real (from GitHub); the rest are TODO placeholders
+// Live sites for each project (the repos themselves are private)
 export const projects = [
   {
-    title: 'Portfolio Website',
+    title: 'MozGate Technology',
     description:
-      'This site: a dark, cinematic portfolio with scroll-driven animation, smooth scrolling, and a Next.js App Router foundation.',
-    tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'GSAP'],
-    href: 'https://github.com/PauloMaculuveJr/portfolio-website',
+      'Website for MozGate Technology, an enterprise IT solutions provider in Mozambique, with scroll-driven GSAP animation.',
+    tags: ['React', 'TypeScript', 'Vite', 'GSAP'],
+    href: 'https://www.mozgate.co.mz/',
     color: 'oklch(0.62 0.24 293)',
+    // Plate 'light' puts logos designed for white backgrounds on a white tile
+    logo: { src: '/projects/mozgate.jpg', width: 600, height: 600, plate: 'light' },
   },
   {
-    title: 'Project Two',
-    description: 'TODO: a short description of another project you are proud of.',
-    tags: ['React', 'Node.js'],
-    href: '',
+    title: 'MotoTorque',
+    description:
+      'Storefront for MotoTorque, a Mozambican retailer of premium motorcycle parts and accessories, with mobile checkout through the M‑Pesa API.',
+    tags: ['React', 'TypeScript', 'Tailwind CSS', 'M-Pesa API'],
+    href: 'https://moto-torque-react-fork-psi.vercel.app',
     color: 'oklch(0.72 0.14 215)',
+    logo: { src: '/projects/mototorque-wide.png', width: 480, height: 129, plate: 'light' },
   },
   {
-    title: 'Project Three',
-    description: 'TODO: a short description of a third project.',
-    tags: ['TypeScript', 'API'],
-    href: '',
+    title: 'Faithful',
+    description: 'Online store for Faithful | Armor of God, a faith-inspired brand.',
+    tags: ['React', 'TypeScript', 'Vite', 'React Router'],
+    href: 'https://www.faithfuljsv.store/store',
     color: 'oklch(0.68 0.22 354)',
+    logo: { src: '/projects/faithful.png', width: 1024, height: 1024, plate: null },
   },
 ] as const
 
-// Based on what this repo uses; add anything else you work with
+// Grouped for the Tech Stack section; add anything else you work with
 export const stack = [
-  'TypeScript',
-  'JavaScript',
-  'React',
-  'Next.js',
-  'Node.js',
-  'Tailwind CSS',
-  'GSAP',
-  'Framer Motion',
-  'shadcn/ui',
-  'Git',
-  'GitHub Actions',
-  'Vercel',
+  { group: 'Languages', items: ['TypeScript', 'JavaScript'] },
+  { group: 'Frontend', items: ['React', 'Next.js', 'Vite', 'Tailwind CSS', 'shadcn/ui'] },
+  { group: 'Motion', items: ['GSAP', 'Framer Motion'] },
+  { group: 'Backend & payments', items: ['Node.js', 'M-Pesa API'] },
+  { group: 'Tooling', items: ['Git', 'GitHub Actions', 'Vercel'] },
 ] as const

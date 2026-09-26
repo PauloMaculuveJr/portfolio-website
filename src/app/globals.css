@@ -51,7 +51,7 @@
 }
 
 :root {
-  /* Light theme: clean zinc neutrals with an electric violet accent and a pink partner */
+  /* Light theme: clean zinc neutrals with a single refined violet accent */
   color-scheme: light;
   --background: oklch(0.985 0.002 286);
   --foreground: oklch(0.17 0.012 286);
@@ -65,15 +65,14 @@
   --secondary-foreground: oklch(0.17 0.012 286);
   --muted: oklch(0.95 0.006 286);
   --muted-foreground: oklch(0.5 0.016 286);
-  --accent: oklch(0.56 0.25 293);
-  --accent-2: oklch(0.63 0.24 354);
+  --accent: oklch(0.52 0.17 285);
+  --accent-2: oklch(0.6 0.12 300);
   --accent-foreground: oklch(0.99 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.17 0.012 286 / 10%);
   --input: oklch(0.17 0.012 286 / 14%);
-  --ring: oklch(0.56 0.25 293 / 55%);
+  --ring: oklch(0.52 0.17 285 / 50%);
   --shadow: oklch(0.3 0.08 293 / 22%);
-  --grain: 0.035;
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
@@ -82,12 +81,12 @@
   --radius: 0.625rem;
   --sidebar: oklch(1 0 0);
   --sidebar-foreground: oklch(0.17 0.012 286);
-  --sidebar-primary: oklch(0.56 0.25 293);
+  --sidebar-primary: oklch(0.52 0.17 285);
   --sidebar-primary-foreground: oklch(0.99 0 0);
   --sidebar-accent: oklch(0.95 0.006 286);
   --sidebar-accent-foreground: oklch(0.17 0.012 286);
   --sidebar-border: oklch(0.17 0.012 286 / 10%);
-  --sidebar-ring: oklch(0.56 0.25 293 / 55%);
+  --sidebar-ring: oklch(0.52 0.17 285 / 55%);
 }
 
 .dark {
@@ -105,23 +104,22 @@
   --secondary-foreground: oklch(0.975 0.003 286);
   --muted: oklch(0.23 0.008 286);
   --muted-foreground: oklch(0.7 0.016 286);
-  --accent: oklch(0.68 0.21 293);
-  --accent-2: oklch(0.73 0.19 354);
+  --accent: oklch(0.72 0.13 285);
+  --accent-2: oklch(0.74 0.09 300);
   --accent-foreground: oklch(0.99 0 0);
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 9%);
   --input: oklch(1 0 0 / 14%);
-  --ring: oklch(0.68 0.21 293 / 60%);
+  --ring: oklch(0.72 0.13 285 / 55%);
   --shadow: oklch(0 0 0 / 50%);
-  --grain: 0.06;
   --sidebar: oklch(0.18 0.007 286);
   --sidebar-foreground: oklch(0.975 0.003 286);
-  --sidebar-primary: oklch(0.68 0.21 293);
+  --sidebar-primary: oklch(0.72 0.13 285);
   --sidebar-primary-foreground: oklch(0.99 0 0);
   --sidebar-accent: oklch(0.23 0.008 286);
   --sidebar-accent-foreground: oklch(0.975 0.003 286);
   --sidebar-border: oklch(1 0 0 / 9%);
-  --sidebar-ring: oklch(0.68 0.21 293 / 60%);
+  --sidebar-ring: oklch(0.72 0.13 285 / 60%);
 }
 
 @layer base {
@@ -134,17 +132,6 @@
   html {
     @apply font-sans;
   }
-}
-
-/* Film-grain texture; static, so no motion cost */
-.grain::after {
-  content: '';
-  position: fixed;
-  inset: -50%;
-  z-index: 60;
-  pointer-events: none;
-  opacity: var(--grain);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 ::selection {
@@ -168,4 +155,13 @@
 ::view-transition-new(root) {
   animation: none;
   mix-blend-mode: normal;
+}
+
+@keyframes scroll-cue {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(200%);
+  }
 }

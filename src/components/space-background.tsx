@@ -3,8 +3,8 @@
 import { useEffect, useRef } from 'react'
 import { MOTION_OK } from '@/lib/gsap'
 
-// Deep-space backdrop for dark mode: parallax starfield, slowly spinning particle galaxies,
-// a nebula, and the occasional shooting star. Stopped entirely in light mode.
+// Deep-space backdrop for dark mode: a quiet parallax starfield, faint slowly spinning
+// galaxies, and the occasional shooting star. Stopped entirely in light mode.
 
 type Rgb = [number, number, number]
 
@@ -69,32 +69,6 @@ function makeGalaxy({ seed, arms, twist, particles, core, outer }: GalaxySpec) {
   return canvas
 }
 
-// Soft ring nebula built from overlapping colored glows
-function makeNebula(seed: number) {
-  const size = 512
-  const canvas = document.createElement('canvas')
-  canvas.width = canvas.height = size
-  const ctx = canvas.getContext('2d')!
-  const rand = mulberry32(seed)
-  const palette = ['#f59e0b', '#22d3ee', '#a78bfa', '#f472b6'].map(hex)
-  ctx.translate(size / 2, size / 2)
-  ctx.globalCompositeOperation = 'lighter'
-  for (let i = 0; i < 90; i++) {
-    const a = rand() * Math.PI * 2
-    const r = size * (0.2 + rand() * 0.12)
-    const x = Math.cos(a) * r
-    const y = Math.sin(a) * r
-    const blob = size * (0.05 + rand() * 0.08)
-    const color = palette[(rand() * palette.length) | 0]
-    const g = ctx.createRadialGradient(x, y, 0, x, y, blob)
-    g.addColorStop(0, rgba(color, 0.22))
-    g.addColorStop(1, rgba(color, 0))
-    ctx.fillStyle = g
-    ctx.fillRect(x - blob, y - blob, blob * 2, blob * 2)
-  }
-  return canvas
-}
-
 type Body = {
   sprite: HTMLCanvasElement
   x: number // fraction of viewport width
@@ -132,7 +106,7 @@ export function SpaceBackground() {
         arms: 3,
         twist: 5,
         particles: 16000,
-        core: '#ffe6c7',
+        core: '#f2ece4',
         outer: '#8b5cf6',
         ...spec,
       })
@@ -140,7 +114,7 @@ export function SpaceBackground() {
     // Scattered down the page so new galaxies drift into view as you scroll
     const bodies: Body[] = [
       {
-        sprite: G({ seed: 1, outer: '#a855f7' }),
+        sprite: G({ seed: 1, outer: '#8b7fd9' }),
         x: 0.55,
         y: 0.28,
         size: 0.52,
@@ -148,21 +122,10 @@ export function SpaceBackground() {
         tilt: -0.08,
         squash: 0.38,
         spin: 0.012,
-        alpha: 0.85,
+        alpha: 0.4,
       },
       {
-        sprite: makeNebula(7),
-        x: 0.4,
-        y: 0.1,
-        size: 0.22,
-        depth: 0.3,
-        tilt: 0.3,
-        squash: 0.85,
-        spin: 0.02,
-        alpha: 0.9,
-      },
-      {
-        sprite: G({ seed: 2, arms: 2, twist: 6, outer: '#ec4899' }),
+        sprite: G({ seed: 2, arms: 2, twist: 6, outer: '#9d8fc9' }),
         x: 0.1,
         y: 0.95,
         size: 0.43,
@@ -170,10 +133,10 @@ export function SpaceBackground() {
         tilt: -0.35,
         squash: 0.35,
         spin: -0.015,
-        alpha: 0.8,
+        alpha: 0.4,
       },
       {
-        sprite: G({ seed: 3, arms: 4, twist: 4, outer: '#22d3ee' }),
+        sprite: G({ seed: 3, arms: 4, twist: 4, outer: '#7fa7c9' }),
         x: 0.85,
         y: 1.6,
         size: 0.41,
@@ -181,7 +144,7 @@ export function SpaceBackground() {
         tilt: 0.4,
         squash: 0.42,
         spin: 0.018,
-        alpha: 0.75,
+        alpha: 0.4,
       },
       {
         sprite: G({ seed: 4, outer: '#6366f1', particles: 12000 }),
@@ -192,21 +155,10 @@ export function SpaceBackground() {
         tilt: 0.15,
         squash: 0.55,
         spin: -0.02,
-        alpha: 0.75,
+        alpha: 0.4,
       },
       {
-        sprite: makeNebula(11),
-        x: 0.75,
-        y: 3.0,
-        size: 0.26,
-        depth: 0.32,
-        tilt: -0.2,
-        squash: 0.8,
-        spin: -0.015,
-        alpha: 0.8,
-      },
-      {
-        sprite: G({ seed: 5, arms: 2, twist: 7, outer: '#f472b6' }),
+        sprite: G({ seed: 5, arms: 2, twist: 7, outer: '#a397c7' }),
         x: 0.65,
         y: 3.7,
         size: 0.46,
@@ -214,10 +166,10 @@ export function SpaceBackground() {
         tilt: -0.3,
         squash: 0.36,
         spin: 0.014,
-        alpha: 0.8,
+        alpha: 0.4,
       },
       {
-        sprite: G({ seed: 6, arms: 3, outer: '#a78bfa' }),
+        sprite: G({ seed: 6, arms: 3, outer: '#8f86c4' }),
         x: 0.15,
         y: 4.4,
         size: 0.38,
@@ -225,12 +177,12 @@ export function SpaceBackground() {
         tilt: 0.35,
         squash: 0.45,
         spin: 0.016,
-        alpha: 0.75,
+        alpha: 0.4,
       },
     ]
 
     const tints = ['#ffffff', '#ffffff', '#cfe0ff', '#ffe9c7', '#e9d5ff'].map(hex)
-    const stars: Star[] = Array.from({ length: 420 }, (_, i) => {
+    const stars: Star[] = Array.from({ length: 300 }, (_, i) => {
       const layer = i % 3 // 0 far, 1 mid, 2 near
       return {
         x: rand(),
@@ -273,8 +225,8 @@ export function SpaceBackground() {
       brightness: number
     }
     const meteors: Meteor[] = []
-    let nextMeteor = 0.8
-    const MAX_METEORS = 7
+    let nextMeteor = 4
+    const MAX_METEORS = 2
 
     // White shooting stars streaking in from either side at varied angles, speeds, and depths
     const spawnMeteor = () => {
@@ -315,7 +267,7 @@ export function SpaceBackground() {
       for (const s of stars) {
         const x = (((s.x * w - mouse.x * s.depth * 120) % w) + w) % w
         const y = (((s.y * h - scroll * s.depth - mouse.y * s.depth * 120) % h) + h) % h
-        const twinkle = animate ? 0.55 + 0.45 * Math.sin(t * s.speed + s.phase) : 0.8
+        const twinkle = animate ? 0.5 + 0.25 * Math.sin(t * s.speed * 0.6 + s.phase) : 0.6
         ctx.fillStyle = rgba(s.tint, twinkle)
         ctx.beginPath()
         ctx.arc(x, y, s.r, 0, Math.PI * 2)
@@ -339,14 +291,13 @@ export function SpaceBackground() {
         ctx.restore()
       }
 
-      // Shooting stars: a new one every second or so, several can be in flight at once
+      // Shooting stars: an occasional quiet streak every several seconds
       if (animate) {
         nextMeteor -= dt
         if (nextMeteor <= 0 && meteors.length < MAX_METEORS) {
           spawnMeteor()
           // Now and then a second one follows close behind
-          if (rand() < 0.2) spawnMeteor()
-          nextMeteor = 0.5 + rand() * 1.3
+          nextMeteor = 6 + rand() * 8
         }
         for (let i = meteors.length - 1; i >= 0; i--) {
           const m = meteors[i]

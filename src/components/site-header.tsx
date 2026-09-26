@@ -1,6 +1,8 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { motion, useMotionValueEvent, useScroll } from 'framer-motion'
 import { GitHubIcon } from '@/components/icons'
 import { Magnetic } from '@/components/magnetic'
@@ -14,6 +16,10 @@ export function SiteHeader() {
 
   useMotionValueEvent(scrollY, 'change', (y) => setScrolled(y > 24))
 
+  // Section anchors live on the home page; from any other page, link back to them
+  const onHome = usePathname() === '/'
+  const section = (hash: string) => (onHome ? hash : `/${hash}`)
+
   return (
     <motion.header
       initial={{ y: -24, opacity: 0 }}
@@ -25,25 +31,25 @@ export function SiteHeader() {
       )}
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-        <a
-          href="#top"
-          aria-label={`${site.name}, back to top`}
+        <Link
+          href={section('#top')}
+          aria-label={onHome ? `${site.name}, back to top` : `${site.name}, home`}
           className="font-display text-2xl tracking-tight"
         >
           {site.initials}
           <span className="text-accent">.</span>
-        </a>
+        </Link>
 
         <nav className="flex items-center gap-2 text-sm">
           <ul className="mr-4 hidden items-center gap-1 md:flex">
             {nav.map((item) => (
               <li key={item.href}>
-                <a
-                  href={item.href}
+                <Link
+                  href={section(item.href)}
                   className="text-muted-foreground hover:text-foreground focus-visible:ring-ring rounded-full px-3 py-1.5 transition-colors outline-none focus-visible:ring-2"
                 >
                   {item.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -58,12 +64,13 @@ export function SiteHeader() {
           </a>
           <ThemeToggle />
           <Magnetic>
-            <a
-              href="#contact"
-              className="border-border hover:border-accent hover:text-accent focus-visible:ring-ring rounded-full border px-4 py-1.5 transition-colors outline-none focus-visible:ring-2"
+            <Link
+              href="/contact"
+              aria-current={onHome ? undefined : 'page'}
+              className="border-border hover:border-accent hover:text-accent aria-[current=page]:border-accent aria-[current=page]:text-accent focus-visible:ring-ring rounded-full border px-4 py-1.5 transition-colors outline-none focus-visible:ring-2"
             >
               Contact
-            </a>
+            </Link>
           </Magnetic>
         </nav>
       </div>

@@ -48,7 +48,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body className="grain flex min-h-full flex-col">
+      <body className="flex min-h-full flex-col">
         <SpaceBackground />
         <SmoothScroll>{children}</SmoothScroll>
         <Cursor />

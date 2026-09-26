@@ -199,6 +199,27 @@ export function Avatar() {
       },
     })
 
+    // Duck out of the way while the service cards are on screen so none are hidden.
+    // Checked live each frame: the Services pin shifts positions, which trips up triggers.
+    let ducked = false
+    const services = document.getElementById('services')
+    const next = document.getElementById('experience')
+    const syncDuck = () => {
+      if (!services || !next) return
+      const h = window.innerHeight
+      const duck =
+        services.getBoundingClientRect().top < h * 0.4 &&
+        next.getBoundingClientRect().top > h * 0.65
+      if (duck === ducked) return
+      ducked = duck
+      gsap.to(inner.current, {
+        yPercent: duck ? 110 : 0,
+        duration: motionOk() ? 0.6 : 0,
+        ease: duck ? 'power2.in' : 'back.out(1.6)',
+        overwrite: 'auto',
+      })
+    }
+
     // --- Looking around. Cursor-driven, so it stays on even with reduced motion. ---
     gsap.set(head.current, { svgOrigin: '200 300' })
     const to = (target: Element | Element[] | null, prop: string, duration: number) =>
@@ -218,6 +239,7 @@ export function Avatar() {
     }))
 
     const look = () => {
+      syncDuck()
       const box = inner.current?.getBoundingClientRect()
       if (!box) return
 
@@ -329,7 +351,9 @@ export function Avatar() {
           <g ref={chair}>
             <path
               d="M 90 420 L 90 262 Q 90 222 130 218 L 270 218 Q 310 222 310 262 L 310 420 Z"
-              style={{ fill: 'var(--accent-2)' }}
+              style={{
+                fill: 'color-mix(in oklch, var(--muted-foreground), var(--background) 45%)',
+              }}
             />
             <rect x="118" y="234" width="164" height="190" rx="22" fill="#000000" opacity="0.14" />
           </g>

@@ -1,6 +1,7 @@
 'use client'
 
 import { useRef } from 'react'
+import Link from 'next/link'
 import { motion, useReducedMotion, useScroll, useTransform, type Variants } from 'framer-motion'
 import { ArrowDown, MapPin } from 'lucide-react'
 import { site } from '@/data/site'
@@ -43,15 +44,11 @@ export function Hero() {
       ref={ref}
       className="relative isolate flex min-h-svh items-center overflow-hidden"
     >
-      {/* Backdrop: ember glow + faint grid, masked toward the edges */}
+      {/* Backdrop: one soft glow + faint grid (light mode), masked toward the edges */}
       <motion.div
         aria-hidden
         style={{ scale: glowScale }}
-        className="bg-accent/25 pointer-events-none absolute top-1/2 left-1/2 -z-10 size-[60rem] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[160px]"
-      />
-      <div
-        aria-hidden
-        className="bg-accent-2/15 pointer-events-none absolute top-[70%] left-[75%] -z-10 size-[36rem] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[140px]"
+        className="bg-accent/10 pointer-events-none absolute top-1/2 left-1/2 -z-10 size-[56rem] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[160px]"
       />
       <div
         aria-hidden
@@ -70,10 +67,7 @@ export function Hero() {
           className="text-muted-foreground mb-8 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm"
         >
           <span className="inline-flex items-center gap-2">
-            <span className="relative flex size-2">
-              <span className="bg-accent absolute inline-flex size-full animate-ping rounded-full opacity-60 motion-reduce:animate-none" />
-              <span className="bg-accent relative inline-flex size-2 rounded-full" />
-            </span>
+            <span className="size-1.5 rounded-full bg-emerald-500" aria-hidden />
             {site.availability}
           </span>
           <span className="inline-flex items-center gap-1.5">
@@ -82,7 +76,7 @@ export function Hero() {
           </span>
         </motion.p>
 
-        <h1 className="text-[clamp(3rem,11vw,9.5rem)] leading-[0.9] font-semibold tracking-[-0.04em]">
+        <h1 className="text-[clamp(2.75rem,8.5vw,7.25rem)] leading-[0.95] font-semibold tracking-[-0.035em]">
           <span className="block overflow-hidden pb-[0.08em]">
             <motion.span variants={line} className="block">
               {firstName}
@@ -91,7 +85,7 @@ export function Hero() {
           <span className="-mb-[0.14em] block overflow-hidden pb-[0.22em]">
             <motion.span
               variants={line}
-              className="font-display from-accent to-accent-2 -mb-[0.2em] block bg-linear-to-r bg-clip-text pr-[0.12em] pb-[0.2em] font-normal tracking-[-0.02em] text-transparent italic"
+              className="font-display text-muted-foreground -mb-[0.2em] block pr-[0.12em] pb-[0.2em] font-normal tracking-[-0.01em] italic"
             >
               {lastName}
             </motion.span>
@@ -110,7 +104,7 @@ export function Hero() {
             <Magnetic>
               <a
                 href="#work"
-                className="group bg-foreground text-background hover:bg-accent focus-visible:ring-ring focus-visible:ring-offset-background inline-flex h-12 items-center gap-2 rounded-full px-6 font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                className="group bg-foreground text-background hover:bg-foreground/85 focus-visible:ring-ring focus-visible:ring-offset-background inline-flex h-12 items-center gap-2 rounded-full px-6 font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
               >
                 View my work
                 <ArrowDown
@@ -120,12 +114,12 @@ export function Hero() {
               </a>
             </Magnetic>
             <Magnetic>
-              <a
-                href="#contact"
+              <Link
+                href="/contact"
                 className="border-border hover:border-foreground/40 focus-visible:ring-ring inline-flex h-12 items-center rounded-full border px-6 font-medium transition-colors outline-none focus-visible:ring-2"
               >
                 Get in touch
-              </a>
+              </Link>
             </Magnetic>
           </div>
         </motion.div>
@@ -137,10 +131,13 @@ export function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.6, duration: 1 }}
-        className="text-muted-foreground hover:text-foreground absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 text-xs tracking-[0.3em] uppercase transition-colors"
+        className="text-muted-foreground hover:text-foreground absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3 text-[0.65rem] tracking-[0.3em] uppercase transition-colors"
       >
         Scroll
-        <ArrowDown className="size-4 animate-bounce motion-reduce:animate-none" aria-hidden />
+        {/* A thin line with a light sliding down it, instead of a bouncing arrow */}
+        <span className="bg-border relative h-10 w-px overflow-hidden" aria-hidden>
+          <span className="bg-foreground/70 absolute inset-x-0 top-0 h-1/2 animate-[scroll-cue_2.2s_ease-in-out_infinite] motion-reduce:animate-none" />
+        </span>
       </motion.a>
     </section>
   )
