@@ -92,11 +92,14 @@ export const projects = [
   },
 ] as const
 
-// Grouped for the Tech Stack section; add anything else you work with
+// Grouped for the Tech Stack section. Drawn from what the projects actually use
+// (package.json, render.yaml, Dockerfiles across the repos), plus Python.
 export const stack = [
-  { group: 'Languages', items: ['TypeScript', 'JavaScript'] },
-  { group: 'Frontend', items: ['React', 'Next.js', 'Vite', 'Tailwind CSS', 'shadcn/ui'] },
-  { group: 'Motion', items: ['GSAP', 'Framer Motion'] },
-  { group: 'Backend & payments', items: ['Node.js', 'M-Pesa API'] },
-  { group: 'Tooling', items: ['Git', 'GitHub Actions', 'Vercel'] },
+  { group: 'Languages', items: ['TypeScript', 'JavaScript', 'Python'] },
+  { group: 'Web', items: ['React', 'Next.js', 'Vite', 'Tailwind CSS', 'shadcn/ui'] },
+  { group: 'Mobile', items: ['React Native', 'Expo'] },
+  { group: 'Backend & AI', items: ['Node.js', 'Express', 'Claude API'] },
+  { group: 'Data', items: ['PostgreSQL', 'MongoDB', 'Supabase'] },
+  { group: 'Motion & 3D', items: ['GSAP', 'Framer Motion', 'Three.js'] },
+  { group: 'Deploy', items: ['Vercel', 'Render', 'Docker', 'Git', 'GitHub Actions'] },
 ] as const
